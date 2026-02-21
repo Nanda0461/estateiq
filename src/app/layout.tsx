@@ -5,6 +5,7 @@ import { Providers } from "@/components/providers";
 import { Navbar } from "@/components/navbar";
 import { Toaster } from "sonner";
 import { AIChatbot } from "@/components/ai-chatbot";
+import { auth } from "@/lib/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,15 +16,17 @@ export const metadata: Metadata = {
   keywords: ["real estate", "properties", "buy", "rent", "sell", "AI recommendations", "EstateIQ"],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50 antialiased`}>
-        <Providers>
+        <Providers session={session}>
           <Navbar />
           <main className="min-h-screen">{children}</main>
           <Toaster richColors position="top-right" />

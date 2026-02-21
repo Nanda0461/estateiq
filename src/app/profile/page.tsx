@@ -1,22 +1,17 @@
-"use client";
+"use server";
 
-import { useAuth } from "@/hooks/use-auth";
-import { User, Mail, Shield, Calendar } from "lucide-react";
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { User, Mail, Shield } from "lucide-react";
 
-export default function ProfilePage() {
-    const { user, isLoading } = useAuth();
+export default async function ProfilePage() {
+    const session = await auth();
 
-    if (isLoading) {
-        return (
-            <div className="max-w-2xl mx-auto px-4 py-8 space-y-4">
-                <div className="h-24 w-24 rounded-full skeleton mx-auto" />
-                <div className="h-6 w-48 rounded-lg skeleton mx-auto" />
-                <div className="h-4 w-32 rounded-lg skeleton mx-auto" />
-            </div>
-        );
+    if (!session || !session.user) {
+        redirect("/login");
     }
 
-    if (!user) return null;
+    const user = session.user;
 
     return (
         <div className="max-w-2xl mx-auto px-4 py-12">
@@ -28,7 +23,7 @@ export default function ProfilePage() {
                 </div>
                 <h1 className="text-2xl font-bold">{user.name}</h1>
                 <p className="text-neutral-500 dark:text-neutral-400 text-sm capitalize">
-                    {user.role?.toLowerCase()} Account
+                    {((user as any).role || "BUYER").toLowerCase()} Account
                 </p>
             </div>
 
@@ -51,7 +46,7 @@ export default function ProfilePage() {
                     <Shield className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                     <div>
                         <div className="text-xs text-neutral-500">Role</div>
-                        <div className="font-medium capitalize">{user.role?.toLowerCase()}</div>
+                        <div className="font-medium capitalize">{((user as any).role || "BUYER").toLowerCase()}</div>
                     </div>
                 </div>
             </div>

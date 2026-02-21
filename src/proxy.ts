@@ -1,31 +1,28 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
+import { auth } from "@/lib/auth"
+import { NextResponse } from "next/server"
+import type { NextRequest } from "next/server"
 
 export async function proxy(req: NextRequest) {
-    const { pathname } = req.nextUrl;
+    const session = await auth()
+    const { pathname } = req.nextUrl
 
     // Protected routes that require authentication
-    const protectedPaths = ["/dashboard", "/profile", "/favorites", "/properties/new", "/admin"];
+    const protectedPaths = ["/dashboard", "/profile", "/favorites", "/admin"];
     const isProtected = protectedPaths.some((path) => pathname.startsWith(path));
 
-    const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
-
-    if (isProtected && !token) {
+    if (isProtected && !session) {
         return NextResponse.redirect(new URL("/login", req.url));
     }
 
-    // Admin-only routes
-    if (pathname.startsWith("/admin") && token?.role !== "ADMIN") {
+    // Role-based protection: Admin only
+    if (pathname.startsWith("/admin") && (session?.user as any)?.role !== "ADMIN") {
         return NextResponse.redirect(new URL("/", req.url));
     }
 
-    // Seller-only routes
-    if (
-        (pathname.startsWith("/properties/new") || pathname.includes("/edit")) &&
-        token?.role !== "SELLER" &&
-        token?.role !== "ADMIN"
-    ) {
+    // Role-based protection: Seller/Admin for management
+    if ((pathname.startsWith("/properties/new")) &&
+        (session?.user as any)?.role !== "SELLER" &&
+        (session?.user as any)?.role !== "ADMIN") {
         return NextResponse.redirect(new URL("/", req.url));
     }
 
