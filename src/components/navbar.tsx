@@ -61,7 +61,7 @@ export function Navbar() {
                             <Building2 className="w-5 h-5 text-white" />
                         </div>
                         <span className="text-xl font-bold gradient-text hidden sm:block">
-                            EstateIQ
+                            EstateIQ Platform
                         </span>
                     </Link>
 
