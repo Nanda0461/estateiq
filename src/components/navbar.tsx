@@ -23,7 +23,7 @@ import {
 import { useState } from "react";
 
 export function Navbar() {
-    const { user, isAuthenticated, signOut } = useAuth();
+    const { user, isAuthenticated, isLoading, signOut } = useAuth();
     const { theme, toggleTheme } = useTheme();
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
@@ -33,21 +33,23 @@ export function Navbar() {
         { href: "/properties", label: "Properties", icon: Building2 },
     ];
 
-    const authLinks = isAuthenticated
-        ? [
-            ...(user?.role === "SELLER" || user?.role === "ADMIN"
-                ? [{ href: "/dashboard", label: "Dashboard", icon: LayoutDashboard }]
-                : []),
-            { href: "/favorites", label: "Favorites", icon: Heart },
-            { href: "/profile", label: "Profile", icon: User },
-            ...(user?.role === "ADMIN"
-                ? [{ href: "/admin", label: "Admin", icon: Shield }]
-                : []),
-        ]
-        : [
-            { href: "/login", label: "Login", icon: LogIn },
-            { href: "/signup", label: "Sign Up", icon: UserPlus },
-        ];
+    const authLinks = isLoading
+        ? []
+        : isAuthenticated
+            ? [
+                ...(user?.role === "SELLER" || user?.role === "ADMIN"
+                    ? [{ href: "/dashboard", label: "Dashboard", icon: LayoutDashboard }]
+                    : []),
+                { href: "/favorites", label: "Favorites", icon: Heart },
+                { href: "/profile", label: "Profile", icon: User },
+                ...(user?.role === "ADMIN"
+                    ? [{ href: "/admin", label: "Admin", icon: Shield }]
+                    : []),
+            ]
+            : [
+                { href: "/login", label: "Login", icon: LogIn },
+                { href: "/signup", label: "Sign Up", icon: UserPlus },
+            ];
 
     const isActive = (href: string) => pathname === href;
 
@@ -81,7 +83,9 @@ export function Navbar() {
                             </Link>
                         ))}
 
-                        {isAuthenticated && (
+                        {isLoading ? (
+                            <div className="w-20 h-8 rounded-lg bg-slate-800 animate-pulse ml-2" />
+                        ) : isAuthenticated ? (
                             <>
                                 <Link
                                     href="/notifications"
@@ -97,7 +101,7 @@ export function Navbar() {
                                     Logout
                                 </button>
                             </>
-                        )}
+                        ) : null}
 
                         <button
                             onClick={toggleTheme}

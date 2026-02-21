@@ -10,7 +10,10 @@ interface Message {
     content: string;
 }
 
+import { useAuth } from "@/hooks/use-auth";
+
 export function AIChatbot({ propertyContext }: { propertyContext?: string }) {
+    const { isAuthenticated } = useAuth();
     const [isOpen, setIsOpen] = useState(false);
     const [isMinimized, setIsMinimized] = useState(false);
     const [message, setMessage] = useState("");
@@ -62,6 +65,8 @@ export function AIChatbot({ propertyContext }: { propertyContext?: string }) {
             setLoading(false);
         }
     };
+
+    if (!isAuthenticated) return null;
 
     return (
         <div className="fixed bottom-6 right-6 z-[60]">
