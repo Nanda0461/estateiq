@@ -1,0 +1,2 @@
+# Exclude standalone prototypes from language stats
+properties_*.html linguist-generated

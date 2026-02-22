@@ -41,6 +41,7 @@ yarn-error.log*
 next-env.d.ts
 
 # temporary files
-*.html
+properties_*.html
+*_test.html
 *.log
 *_error.txt
