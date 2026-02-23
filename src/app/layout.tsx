@@ -29,7 +29,14 @@ export default async function RootLayout({
         <Providers session={session}>
           <Navbar />
           <main className="min-h-screen">{children}</main>
-          <Toaster richColors position="top-right" />
+          <Toaster
+            richColors
+            position="bottom-center"
+            toastOptions={{
+              className: "mobile-toast",
+            }}
+            style={{ zIndex: 9999 }}
+          />
           <AIChatbot />
         </Providers>
       </body>

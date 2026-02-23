@@ -21,6 +21,7 @@ function PropertiesContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
+    const [showMobileFilters, setShowMobileFilters] = useState(false);
 
     const [properties, setProperties] = useState<Property[]>([]);
     const [loading, setLoading] = useState(true);
@@ -91,8 +92,22 @@ function PropertiesContent() {
     return (
         <div className="max-w-7xl mx-auto px-4 py-8">
             <div className="flex flex-col md:flex-row gap-8">
+                {/* Mobile Filter Toggle */}
+                <button
+                    onClick={() => setShowMobileFilters(!showMobileFilters)}
+                    className="md:hidden flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 text-sm font-bold transition-all"
+                >
+                    <SlidersHorizontal className="w-4 h-4" />
+                    {showMobileFilters ? "Hide Filters" : "Show Filters"}
+                    {activeFilterCount > 0 && (
+                        <span className="flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-blue-600 text-[10px] text-white font-black">
+                            {activeFilterCount}
+                        </span>
+                    )}
+                </button>
+
                 {/* Sidebar - Simple Filters */}
-                <aside className="w-full md:w-64 space-y-6">
+                <aside className={`w-full md:w-64 space-y-6 ${showMobileFilters ? 'block' : 'hidden md:block'}`}>
                     <div className="flex items-center justify-between">
                         <h2 className="text-xl font-bold flex items-center gap-2">
                             <SlidersHorizontal className="w-5 h-5" />
@@ -185,8 +200,8 @@ function PropertiesContent() {
                         />
                     </section>
 
-                    <div className="flex items-center justify-between mb-2">
-                        <h2 className="text-2xl font-bold">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-2">
+                        <h2 className="text-xl sm:text-2xl font-bold">
                             {loading ? "Searching..." : `${total} Properties found`}
                         </h2>
                         <select
@@ -203,7 +218,7 @@ function PropertiesContent() {
                         </select>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                         {loading ? (
                             Array.from({ length: 6 }).map((_, i) => <SkeletonCard key={i} />)
                         ) : properties.length === 0 ? (

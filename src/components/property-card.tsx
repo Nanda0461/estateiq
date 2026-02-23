@@ -37,7 +37,7 @@ export function PropertyCard({
     return (
         <div
             className={cn(
-                "group relative rounded-[2.5rem] bg-white dark:bg-neutral-900 border overflow-hidden transition-all duration-500",
+                "group relative rounded-2xl sm:rounded-[2.5rem] bg-white dark:bg-neutral-900 border overflow-hidden transition-all duration-500",
                 isSelected
                     ? "border-blue-500 ring-4 ring-blue-500/10 shadow-2xl shadow-blue-500/20"
                     : "border-neutral-200 dark:border-neutral-800 shadow-sm hover:shadow-2xl hover:shadow-blue-500/5 hover:-translate-y-2"
@@ -96,7 +96,7 @@ export function PropertyCard({
             </div>
 
             {/* Content Section */}
-            <div className="p-6">
+            <div className="p-4 sm:p-6">
                 <div className="flex items-center gap-2 mb-2">
                     <div className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-600 text-[9px] font-black uppercase tracking-tighter cursor-help" onClick={() => setShowInsights(true)}>
                         <Sparkles className="w-2.5 h-2.5" />

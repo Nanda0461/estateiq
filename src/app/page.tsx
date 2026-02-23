@@ -89,7 +89,7 @@ export default function HomePage() {
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center px-4">
+      <section className="relative min-h-[75vh] sm:min-h-[90vh] flex items-center justify-center px-4">
         {/* Background gradient */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 via-transparent to-amber-500/10 dark:from-blue-900/20 dark:to-amber-900/10" />
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl" />
@@ -110,7 +110,7 @@ export default function HomePage() {
 
           <motion.h1
             variants={fadeInUp}
-            className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight mb-6"
+            className="text-3xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight mb-4 sm:mb-6"
           >
             Find Your{" "}
             <span className="gradient-text">Dream Property</span>
@@ -118,7 +118,7 @@ export default function HomePage() {
 
           <motion.p
             variants={fadeInUp}
-            className="text-lg sm:text-xl text-neutral-600 dark:text-neutral-400 mb-10 max-w-2xl mx-auto"
+            className="text-base sm:text-lg md:text-xl text-neutral-600 dark:text-neutral-400 mb-8 sm:mb-10 max-w-2xl mx-auto"
           >
             Discover the perfect home, apartment, or commercial space with our AI-powered
             recommendations, price predictions, and neighborhood insights.
@@ -128,7 +128,7 @@ export default function HomePage() {
           <motion.form
             variants={fadeInUp}
             onSubmit={handleSearch}
-            className="flex items-center gap-2 max-w-xl mx-auto bg-white dark:bg-neutral-900 rounded-2xl p-2 shadow-xl shadow-neutral-200/50 dark:shadow-neutral-900/50 border border-neutral-200 dark:border-neutral-800"
+            className="flex flex-col sm:flex-row items-center gap-2 max-w-xl mx-auto bg-white dark:bg-neutral-900 rounded-2xl p-2 shadow-xl shadow-neutral-200/50 dark:shadow-neutral-900/50 border border-neutral-200 dark:border-neutral-800"
           >
             <div className="flex items-center gap-2 flex-1 px-3">
               <Search className="w-5 h-5 text-neutral-400" />
@@ -142,7 +142,7 @@ export default function HomePage() {
             </div>
             <button
               type="submit"
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-medium text-sm hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-200 hover:scale-[1.02]"
+              className="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white font-medium text-sm hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-200 hover:scale-[1.02]"
             >
               Search
             </button>
@@ -228,13 +228,13 @@ export default function HomePage() {
       {/* CTA */}
       <section className="py-20 px-4">
         <motion.div
-          className="max-w-4xl mx-auto text-center p-12 rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-800 dark:to-blue-900 text-white shadow-2xl shadow-blue-500/20"
+          className="max-w-4xl mx-auto text-center p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-800 dark:to-blue-900 text-white shadow-2xl shadow-blue-500/20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
         >
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">
             Ready to Find Your Dream Home?
           </h2>
           <p className="text-blue-100 mb-8 max-w-xl mx-auto">
@@ -260,7 +260,7 @@ export default function HomePage() {
 
       {/* Footer */}
       <footer className="border-t border-neutral-200 dark:border-neutral-800 py-12 px-4">
-        <div className="max-w-6xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="max-w-6xl mx-auto grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           <div>
             <div className="flex items-center gap-2 mb-3">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-amber-500 flex items-center justify-center">

@@ -107,7 +107,7 @@ export default function PropertyDetailPage({
     return (
         <div className="max-w-6xl mx-auto px-4 py-8">
             {/* Image Gallery */}
-            <div className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden mb-8 bg-neutral-100 dark:bg-neutral-900">
+            <div className="relative h-[280px] sm:h-[400px] md:h-[500px] rounded-2xl overflow-hidden mb-6 sm:mb-8 bg-neutral-100 dark:bg-neutral-900">
                 <img
                     src={displayImages[currentImage]}
                     alt={property.title}
@@ -156,12 +156,12 @@ export default function PropertyDetailPage({
                 <div className="lg:col-span-2 space-y-6">
                     {/* Title & Price */}
                     <div>
-                        <h1 className="text-3xl font-bold mb-2">{property.title}</h1>
+                        <h1 className="text-2xl sm:text-3xl font-bold mb-2">{property.title}</h1>
                         <div className="flex items-center gap-2 text-neutral-500 dark:text-neutral-400 mb-4">
                             <MapPin className="w-4 h-4" />
                             <span>{property.location}</span>
                         </div>
-                        <div className="text-3xl font-bold gradient-text">
+                        <div className="text-2xl sm:text-3xl font-bold gradient-text">
                             {formatPrice(property.price)}
                             {property.listingType === "FOR_RENT" && (
                                 <span className="text-lg font-normal text-neutral-500">/month</span>
@@ -170,7 +170,7 @@ export default function PropertyDetailPage({
                     </div>
 
                     {/* Quick Stats */}
-                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                         {[
                             { icon: Bed, label: "Bedrooms", value: property.bedrooms },
                             { icon: Bath, label: "Bathrooms", value: property.bathrooms },

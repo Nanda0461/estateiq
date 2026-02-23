@@ -69,7 +69,7 @@ export function AIChatbot({ propertyContext }: { propertyContext?: string }) {
     if (!isAuthenticated) return null;
 
     return (
-        <div className="fixed bottom-6 right-6 z-[60]">
+        <div className="fixed bottom-4 right-3 sm:bottom-6 sm:right-6 z-[60]">
             <AnimatePresence>
                 {!isOpen && (
                     <motion.button
@@ -77,9 +77,9 @@ export function AIChatbot({ propertyContext }: { propertyContext?: string }) {
                         animate={{ scale: 1, opacity: 1 }}
                         exit={{ scale: 0, opacity: 0 }}
                         onClick={() => setIsOpen(true)}
-                        className="w-14 h-14 rounded-full bg-gradient-to-br from-blue-600 to-amber-500 text-white shadow-lg shadow-blue-500/30 flex items-center justify-center hover:scale-110 transition-transform"
+                        className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-blue-600 to-amber-500 text-white shadow-lg shadow-blue-500/30 flex items-center justify-center hover:scale-110 transition-transform"
                     >
-                        <MessageSquare className="w-6 h-6" />
+                        <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />
                     </motion.button>
                 )}
             </AnimatePresence>
@@ -92,10 +92,10 @@ export function AIChatbot({ propertyContext }: { propertyContext?: string }) {
                             y: 0,
                             opacity: 1,
                             scale: 1,
-                            height: isMinimized ? "64px" : "500px"
+                            height: isMinimized ? "64px" : "min(500px, 70vh)"
                         }}
                         exit={{ y: 20, opacity: 0, scale: 0.95 }}
-                        className="w-[350px] bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden flex flex-col"
+                        className="w-[calc(100vw-1.5rem)] sm:w-[350px] bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden flex flex-col"
                     >
                         {/* Header */}
                         <div className="p-4 bg-gradient-to-r from-blue-600 to-blue-500 text-white flex items-center justify-between">

@@ -94,10 +94,10 @@ export default function DashboardPage() {
     return (
         <div className="max-w-6xl mx-auto px-4 py-8">
             {/* Header */}
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
                 <div>
-                    <h1 className="text-2xl font-bold flex items-center gap-2">
-                        <LayoutDashboard className="w-6 h-6" />
+                    <h1 className="text-xl sm:text-2xl font-bold flex items-center gap-2">
+                        <LayoutDashboard className="w-5 h-5 sm:w-6 sm:h-6" />
                         Dashboard
                     </h1>
                     <p className="text-sm text-neutral-500 dark:text-neutral-400 mt-1">
@@ -106,7 +106,7 @@ export default function DashboardPage() {
                 </div>
                 <Link
                     href="/properties/new"
-                    className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white text-sm font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+                    className="flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 text-white text-sm font-medium hover:shadow-lg hover:shadow-blue-500/25 transition-all w-full sm:w-auto"
                 >
                     <PlusCircle className="w-4 h-4" />
                     Add Property
@@ -114,7 +114,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Stats Grid */}
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-8">
                 {statCards.map(({ label, value, icon: Icon, color }) => (
                     <div
                         key={label}
@@ -123,7 +123,7 @@ export default function DashboardPage() {
                         <div className={`w-10 h-10 rounded-xl flex items-center justify-center mb-3 ${color}`}>
                             <Icon className="w-5 h-5" />
                         </div>
-                        <div className="text-2xl font-bold">{value}</div>
+                        <div className="text-xl sm:text-2xl font-bold">{value}</div>
                         <div className="text-sm text-neutral-500 dark:text-neutral-400">{label}</div>
                     </div>
                 ))}
@@ -153,7 +153,7 @@ export default function DashboardPage() {
                                     <div className="font-medium truncate">{prop.title}</div>
                                     <div className="text-sm text-neutral-500">{formatPrice(prop.price)}</div>
                                 </div>
-                                <div className="flex items-center gap-4 text-xs text-neutral-400 flex-shrink-0">
+                                <div className="hidden sm:flex items-center gap-4 text-xs text-neutral-400 flex-shrink-0">
                                     <span className="flex items-center gap-1">
                                         <Eye className="w-3 h-3" /> {prop.viewsCount}
                                     </span>
@@ -161,8 +161,8 @@ export default function DashboardPage() {
                                         <MessageSquare className="w-3 h-3" /> {prop._count.inquiries}
                                     </span>
                                     <span className={`px-2 py-1 rounded-md text-xs font-medium ${prop.status === "ACTIVE" ? "bg-emerald-500/10 text-emerald-600" :
-                                            prop.status === "SOLD" ? "bg-violet-500/10 text-violet-600" :
-                                                "bg-amber-500/10 text-amber-600"
+                                        prop.status === "SOLD" ? "bg-violet-500/10 text-violet-600" :
+                                            "bg-amber-500/10 text-amber-600"
                                         }`}>
                                         {prop.status}
                                     </span>
